@@ -20,32 +20,32 @@ def download_multiple_files(save_path):
         for quarter in quarters:
             if year == 2023 and quarter == 'Q4':
                 break  # 跳过2023 Q4
-            # zip_filename = f"data_{quarter}_{year}.zip"
-            # url = base_url + zip_filename
-            # file_path = os.path.join(save_path, zip_filename)
-            #
-            # # 下载文件
-            # response = requests.get(url)
-            # if response.status_code == 200:
-            #     with open(file_path, 'wb') as file:
-            #         file.write(response.content)
-            #     print(f"Downloaded {zip_filename} to {file_path}")
-            #
-            #     # 解压文件
-            #     if zipfile.is_zipfile(file_path):
-            #         if year == 2022 or year == 2023:
-            #             with zipfile.ZipFile(file_path, 'r') as zip_ref:
-            #                 zip_ref.extractall(save_path)
-            #                 print(f"Extracted {zip_filename} to {save_path}")
-            #         else:
-            #             with zipfile.ZipFile(file_path, 'r') as zip_ref:
-            #                 extract_path = os.path.join(save_path, zip_filename.replace('.zip', ''))  # 解压到子目录
-            #                 zip_ref.extractall(extract_path)
-            #                 print(f"Extracted {zip_filename} to {extract_path}")
-            #     else:
-            #         print(f"{zip_filename} is not a valid zip file.")
-            # else:
-            #     raise Exception(f"Failed to download {url}. Status code: {response.status_code}")
+            zip_filename = f"data_{quarter}_{year}.zip"
+            url = base_url + zip_filename
+            file_path = os.path.join(save_path, zip_filename)
+
+            # 下载文件
+            response = requests.get(url)
+            if response.status_code == 200:
+                with open(file_path, 'wb') as file:
+                    file.write(response.content)
+                print(f"Downloaded {zip_filename} to {file_path}")
+
+                # 解压文件
+                if zipfile.is_zipfile(file_path):
+                    if year == 2022 or year == 2023:
+                        with zipfile.ZipFile(file_path, 'r') as zip_ref:
+                            zip_ref.extractall(save_path)
+                            print(f"Extracted {zip_filename} to {save_path}")
+                    else:
+                        with zipfile.ZipFile(file_path, 'r') as zip_ref:
+                            extract_path = os.path.join(save_path, zip_filename.replace('.zip', ''))  # 解压到子目录
+                            zip_ref.extractall(extract_path)
+                            print(f"Extracted {zip_filename} to {extract_path}")
+                else:
+                    print(f"{zip_filename} is not a valid zip file.")
+            else:
+                raise Exception(f"Failed to download {url}. Status code: {response.status_code}")
 
 
 # 定义 Spark 分析函数
